@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 as builder
+FROM ubuntu:18.04 as builder
 
 ARG REDIS_VERSION=4.0.11
 
@@ -11,9 +11,9 @@ RUN apt-get update && \
     cd redis-${REDIS_VERSION}/src && \
     make noopt
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install gdb gdbserver -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' && \
+    DEBIAN_FRONTEND=noninteractive apt-get install gdb gdbserver cgdb -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' && \
     rm /etc/sysctl.d/10-ptrace.conf && \
     sysctl -p
 
