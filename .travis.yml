@@ -3,6 +3,7 @@ services: docker
 
 env:
   - VERSION=4.0
+  - VERSION=5.0
 
 before_script:
   - cd "$VERSION"
